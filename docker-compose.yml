@@ -1,0 +1,65 @@
+services:
+  db:
+    image: postgres:16-alpine
+    container_name: ont_db
+    environment:
+      POSTGRES_DB: ont_db
+      POSTGRES_USER: ${DB_USER:-ont_user}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./database/init.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    networks:
+      - ont_network
+    restart: unless-stopped
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${DB_USER:-ont_user} -d ont_db"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+  backend:
+    build: ./backend
+    container_name: ont_backend
+    environment:
+      DATABASE_URL: postgresql://${DB_USER:-ont_user}:${DB_PASSWORD}@db:5432/ont_db
+      SECRET_KEY: ${SECRET_KEY}
+      ALLOWED_ORIGINS: ${ALLOWED_ORIGINS:-http://localhost}
+    depends_on:
+      db:
+        condition: service_healthy
+    networks:
+      - ont_network
+    restart: unless-stopped
+
+  frontend:
+    build: ./frontend
+    container_name: ont_frontend
+    depends_on:
+      - backend
+    networks:
+      - ont_network
+    restart: unless-stopped
+
+  nginx:
+    image: nginx:alpine
+    container_name: ont_nginx
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d:ro
+      - ./nginx/ssl:/etc/nginx/ssl:ro
+    depends_on:
+      - frontend
+      - backend
+    networks:
+      - ont_network
+    restart: unless-stopped
+
+networks:
+  ont_network:
+    driver: bridge
+
+volumes:
+  postgres_data:

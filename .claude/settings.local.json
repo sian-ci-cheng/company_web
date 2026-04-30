@@ -1,0 +1,40 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(lsb_release -a)",
+      "Bash(sudo apt-get *)",
+      "Read(//usr/bin/**)",
+      "Read(//usr/local/bin/**)",
+      "Bash(sudo -n true)",
+      "Bash(snap list *)",
+      "Read(//snap/bin/**)",
+      "Bash(docker --version)",
+      "Bash(docker compose *)",
+      "Bash(docker info *)",
+      "Bash(sg docker *)",
+      "Bash(openssl rand *)",
+      "Bash(sed -i \"s/changeme_strong_password/ONT_db_2024!/\" .env)",
+      "Bash(openssl req *)",
+      "Bash(curl -sk https://localhost/api/ping)",
+      "Bash(curl -sk https://localhost/api/health -H \"Authorization: Bearer test\")",
+      "Bash(curl -sk https://localhost/api/auth/login -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=admin&password=Admin@ONT2024')",
+      "Bash(python3 -m json.tool)",
+      "Bash(curl -sk https://localhost/api/auth/login -X POST -H 'Content-Type: application/x-www-form-urlencoded' -d 'username=admin&password=Admin%40ONT2024')",
+      "WebFetch(domain:siyi.biz)",
+      "WebFetch(domain:www.reedrone.com)",
+      "WebFetch(domain:heishatech.com)",
+      "WebSearch",
+      "WebFetch(domain:shop.siyi.biz)",
+      "Bash(python3 -c \"import json,sys; d=json.load\\(sys.stdin\\); print\\(json.dumps\\(d.get\\('dependencies',{}\\), indent=2\\)\\)\")",
+      "WebFetch(domain:www.worldronemarket.com)",
+      "Bash(python3 -)",
+      "Bash(npm run *)",
+      "Bash(npx tsc *)",
+      "Bash(node_modules/.bin/tsc --noEmit)",
+      "Bash(command -v nvm)",
+      "Read(//home/user/.nvm/**)",
+      "Bash(chmod +x /home/user/company_web/start.sh)",
+      "Bash(sort -k6,7)"
+    ]
+  }
+}

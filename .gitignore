@@ -1,0 +1,6 @@
+.env
+nginx/ssl/
+frontend/node_modules/
+frontend/.next/
+__pycache__/
+*.pyc
