@@ -1,0 +1,43 @@
+graph LR
+    Root((Omni Nexus Tech<br/>網頁按鍵結構)) --> Nav[導覽列 Navigation]
+    Root --> Hero[主視覺區 Hero Section]
+    Root --> Product[核心技術區 Product Cards]
+    Root --> CTA[行動呼籲區 CTA Section]
+    Root --> Footer[頁尾區 Footer]
+
+    %% 導覽列子項
+    Nav --> N1[探索 Explore]
+    Nav --> N2[安全 Safety]
+    Nav --> N3[社群 Community]
+    Nav --> N4[語言切換 Toggle Language]
+    Nav --> N5[立即體驗 Try Now]
+    Nav --> N6[行動版選單 Mobile Menu]
+
+    %% 主視覺區子項
+    Hero --> H1[觀看演示 Watch Demo]
+    Hero --> H2[解決方案 Solutions]
+
+    %% 核心技術區子項
+    Product --> P1[行動中心 ON-Dock]
+    Product --> P2[救護就緒 ONT GCS]
+
+    %% 行動呼籲區子項
+    CTA --> C1[立即嘗試 Try it now]
+
+    %% 頁尾區子項
+    Footer --> F1[公司資訊]
+    Footer --> F2[法律條款]
+    Footer --> F3[社群媒體]
+
+    F1 --> F1a[招募人才 Careers]
+    F1 --> F1b[部落格 Blog]
+    F1 --> F1c[聯絡我們 Contact]
+    F1 --> F1d[意見回饋 Feedback]
+
+    F2 --> F2a[隱私權政策 Privacy Policy]
+    F2 --> F2b[服務條款 Terms of Service]
+    F2 --> F2c[Cookie 政策 Cookie Policy]
+
+    F3 --> F3a[Twitter]
+    F3 --> F3b[LinkedIn]
+    F3 --> F3c[Instagram]
