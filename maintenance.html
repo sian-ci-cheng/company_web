@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>網站維護中 — Omni Nexus Tech</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 2rem;
+      overflow: hidden;
+    }
+
+    /* background glow */
+    body::before {
+      content: '';
+      position: fixed;
+      inset: 0;
+      background: radial-gradient(ellipse at 50% 60%, rgba(208,240,64,0.06) 0%, transparent 65%);
+      pointer-events: none;
+    }
+
+    .container {
+      text-align: center;
+      max-width: 560px;
+      position: relative;
+      z-index: 1;
+      animation: fadeUp 0.9s ease both;
+    }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.75rem;
+      margin-bottom: 3.5rem;
+    }
+
+    .logo img {
+      height: 36px;
+      width: 36px;
+      filter: invert(1);
+      border-radius: 10px;
+    }
+
+    .logo span {
+      font-family: 'Outfit', sans-serif;
+      font-weight: 700;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: rgba(255,255,255,0.7);
+    }
+
+    .badge {
+      display: inline-block;
+      font-size: 0.65rem;
+      font-weight: 900;
+      letter-spacing: 0.2em;
+      text-transform: uppercase;
+      background: #D0F040;
+      color: #000;
+      padding: 0.3rem 0.9rem;
+      border-radius: 999px;
+      margin-bottom: 1.75rem;
+    }
+
+    h1 {
+      font-family: 'Outfit', sans-serif;
+      font-size: clamp(3rem, 12vw, 6rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.04em;
+      margin-bottom: 1.5rem;
+    }
+
+    h1 span { color: #D0F040; font-style: italic; }
+
+    p {
+      font-size: 1rem;
+      color: rgba(255,255,255,0.5);
+      line-height: 1.7;
+      margin-bottom: 0.6rem;
+    }
+
+    .divider {
+      width: 40px;
+      height: 1px;
+      background: rgba(255,255,255,0.1);
+      margin: 2.5rem auto;
+    }
+
+    .contact {
+      font-size: 0.8rem;
+      color: rgba(255,255,255,0.3);
+      letter-spacing: 0.05em;
+    }
+
+    .contact a {
+      color: rgba(208,240,64,0.7);
+      text-decoration: none;
+    }
+
+    .contact a:hover { color: #D0F040; }
+
+    /* subtle corner decoration */
+    .corner {
+      position: fixed;
+      font-family: 'Outfit', sans-serif;
+      font-weight: 900;
+      font-size: clamp(8rem, 25vw, 18rem);
+      line-height: 1;
+      color: rgba(255,255,255,0.02);
+      pointer-events: none;
+      user-select: none;
+    }
+    .corner-tl { top: -2rem; left: -1rem; }
+    .corner-br { bottom: -2rem; right: -1rem; }
+  </style>
+</head>
+<body>
+
+  <span class="corner corner-tl">O</span>
+  <span class="corner corner-br">T</span>
+
+  <div class="container">
+    <div class="logo">
+      <img src="ONT Shield_logo.png" alt="ONT Logo" />
+      <span>Omni Nexus Tech</span>
+    </div>
+
+    <div class="badge">System Maintenance</div>
+
+    <h1>網站<br /><span>維護中</span></h1>
+
+    <div class="divider"></div>
+
+    <p>我們正在進行系統升級與維護，<br />預計將於近期恢復服務。</p>
+    <p>We are upgrading our systems.<br />The site will be back shortly.</p>
+
+    <div class="divider"></div>
+
+    <p class="contact">
+      如有緊急需求，請聯絡 &nbsp;
+      <a href="mailto:info@omninexustech.com">info@omninexustech.com</a>
+    </p>
+  </div>
+
+</body>
+</html>
