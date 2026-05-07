@@ -1,6 +1,6 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { Globe, Shield, Zap, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 const translations = {
   en: {
@@ -191,9 +191,57 @@ const translations = {
   }
 };
 
+function parseCSVLine(line: string): [string, string, string] {
+  const out: string[] = [];
+  let cur = '';
+  let inQ = false;
+  for (let i = 0; i < line.length; i++) {
+    const c = line[i];
+    if (c === '"') {
+      if (inQ && line[i + 1] === '"') { cur += '"'; i++; }
+      else { inQ = !inQ; }
+    } else if (c === ',' && !inQ) { out.push(cur); cur = ''; }
+    else { cur += c; }
+  }
+  out.push(cur);
+  return [out[0] ?? '', out[1] ?? '', out[2] ?? ''];
+}
+
+function setPath(obj: Record<string, unknown>, path: string, val: unknown) {
+  const parts = path.split('.');
+  let node = obj;
+  for (let i = 0; i < parts.length - 1; i++) {
+    if (!node[parts[i]]) node[parts[i]] = {};
+    node = node[parts[i]] as Record<string, unknown>;
+  }
+  node[parts[parts.length - 1]] = val;
+}
+
+function parseContentCSV(csv: string): typeof translations {
+  const en: Record<string, unknown> = {};
+  const zh: Record<string, unknown> = {};
+  for (const line of csv.trim().split('\n').slice(1)) {
+    if (!line.trim()) continue;
+    const [key, enVal, zhVal] = parseCSVLine(line);
+    if (!key) continue;
+    const toVal = (v: string) => (v.includes('|') ? v.split('|') : v);
+    setPath(en, key, toVal(enVal));
+    setPath(zh, key, toVal(zhVal || enVal));
+  }
+  return { en, zh } as typeof translations;
+}
+
 export default function App() {
   const [lang, setLang] = useState<'en' | 'zh'>('zh');
-  const t = translations[lang];
+  const [allT, setAllT] = useState(translations);
+  const t = allT[lang];
+
+  useEffect(() => {
+    fetch('./content.csv')
+      .then(r => r.text())
+      .then(csv => setAllT(parseContentCSV(csv)))
+      .catch(() => {});
+  }, []);
 
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);

@@ -1,0 +1,58 @@
+key,en,zh
+nav.explore,Explore,探索
+nav.safety,Safety,安全
+nav.about,About Us,關於我們
+nav.tryNow,Try AeroSwift,立即體驗
+hero.tag,"Orchestrate. Navigate. Threshold.","Orchestrate. Navigate. Threshold."
+hero.title1,Rescue defined,智慧科技
+hero.title2,by intelligence,定義救援
+hero.desc,"Empowering emergency response with autonomous aircraft and integrated mobile charging stations.",以自主飛行器與整合式行動充電站，強化緊急應對效率。
+hero.watchDemo,Watch Demo,觀看演示
+hero.solutions,Solutions,解決方案
+explore.intro,Discover our complete ecosystem of autonomous aerial systems.,探索我們完整的自主空中系統生態。
+explore.orchestrate.zh,統籌,統籌
+explore.orchestrate.product,ON-Dock,ON-Dock
+explore.orchestrate.productDesc,Autonomous Hangar System,自主機庫系統
+explore.orchestrate.features,Visual Landing|Communication Relay Station|Detachable RTK|4/5G Module,視覺降落|通訊中繼站|可吸拆RTK|4/5G模組
+explore.navigate.zh,導航,導航
+explore.navigate.product,ONT-GCS,ONT-GCS
+explore.navigate.productDesc,Multi-drone Ground Control,多無人機地面控制
+explore.navigate.features,Multi-drone Swarm Flight|Custom Ground Control System (ONT-GCS),多無人機群飛|客製化地面控制站（ONT-GCS）
+explore.threshold.zh,邊界守護,邊界守護
+explore.threshold.product,AI Vision,AI辨識
+explore.threshold.productDesc,Intelligent Recognition,智慧辨識系統
+explore.threshold.features,AI Object Recognition|Multi-drone Reconnaissance,AI物件辨識|多無人機偵蒐
+about.label,Our Philosophy,公司理念
+about.subtitle,統籌、導航、邊界守護,統籌、導航、邊界守護
+about.intro,"OmniNexus Tech was founded on a single conviction: intelligent autonomy should serve those who need it most. From emergency rescue to critical infrastructure monitoring, we build systems that let operators achieve more — with greater precision, speed, and confidence.","永誠發科技創立於一個核心信念：智慧自主應當服務於最需要它的人。從緊急救援到關鍵基礎設施監控，我們打造的系統讓操作人員以更高的精準度、速度與信心完成任務。"
+about.orchestrate.zh,統籌,統籌
+about.orchestrate.desc,"Every mission is a web of moving parts — drones, data, operators, and ground infrastructure. We design platforms that bring order to complexity, enabling seamless coordination across every layer of an operation. Our systems don't just automate tasks; they harmonize entire ecosystems so teams can focus on decisions, not logistics.","每一次任務都是複雜系統的交織——無人機、數據、操作員與地面基礎設施。我們設計的平台為複雜性帶來秩序，讓每一個作業層面都能無縫協調。我們的系統不只是自動化任務，更整合整個作業生態，讓團隊專注於決策，而非後勤。"
+about.navigate.zh,導航,導航
+about.navigate.desc,"The real world is unpredictable. Weather shifts, terrain changes, communications drop. We engineer our systems to move through uncertainty with confidence — adaptive, resilient, and always oriented toward the mission. Navigation, for us, is not just a flight path. It is the capacity to find the right course under any condition.","現實世界充滿不確定性。天氣變化、地形更迭、通訊中斷。我們將系統設計為在不確定中穩健前行——具備適應性、韌性，並始終朝任務目標定向。導航對我們而言，不只是飛行路徑，更是在任何條件下找到正確航向的能力。"
+about.threshold.zh,邊界守護,邊界守護
+about.threshold.desc,"We exist at the edge of what is possible. Every product we build pushes the boundary between human capability and machine precision — redefining what operators can see, reach, and protect. Threshold is our promise: to keep advancing the frontier, so that the limits of today become the baseline of tomorrow.",我們存在於可能性的邊界。每一款產品都在推進人類能力與機器精準度之間的界線——重新定義操作員能看見、觸及與守護的範疇。邊界守護是我們的承諾：持續推進前沿，讓今日的極限成為明日的起點。
+cards.hubs.title,ON-Dock →,ON-Dock →
+cards.hubs.desc,"ON-Dock provides precision autonomous landing and rapid energy replenishment in any field condition.",ON-Dock 在任何野外環境下皆能提供精準的自主降落與快速電力補充。
+cards.hubs.feature1,Autonomous Docking,自主對接系統
+cards.hubs.feature2,Weatherproof Design,全天候防護設計
+cards.rescue.title,ONT GCS →,ONT GCS →
+cards.rescue.desc,"Integrated mission control systems for real-time aerial intelligence and emergency cargo deployment.","整合任務控制系統，實現即時空中情報與緊急貨物部署。"
+cards.rescue.feature1,Smart Monitoring,智慧監控
+cards.rescue.feature2,Remote Operation,遠端操作
+cta.title,Ready to fly?,準備好啟航了嗎？
+cta.button,Try it now,立即嘗試
+footer.companyName,"Omni Nexus Tech Co., Ltd.",永誠發科技股份有限公司
+footer.addressLabel,Address: ,地址：
+footer.address,"7F06, No. 5, Sec. 5, Xinyi Rd., Xinyi Dist., Taipei City",台北市信義區信義路五段5號7F06
+footer.phoneLabel,Phone: ,電話：
+footer.phone,02-27588857,02-27588857
+footer.desc,"Empowering the world with intelligent autonomous systems and high-performance logistics platforms.",以智慧自主系統與高效能物流平台賦能全球。
+footer.sections.company,Company,公司資訊
+footer.sections.legal,Legal,法律條款
+footer.links.careers,Careers,招募人才
+footer.links.contact,Contact,聯絡我們
+footer.links.feedback,Feedback,意見回饋
+footer.links.privacy,Privacy Policy,隱私權政策
+footer.links.terms,Terms of Service,服務條款
+footer.links.cookies,Cookie Policy,Cookie 政策
+footer.rights,© 2026 Omni Nexus Tech. All rights reserved.,© 2026 永誠發科技。保留所有權利。
