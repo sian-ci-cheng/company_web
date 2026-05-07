@@ -1,5 +1,5 @@
 key,en,zh
-nav.explore,Explore,探索
+nav.explore,Explore OmniNexus,探索永誠發
 nav.safety,Safety,安全
 nav.about,About Us,關於我們
 nav.tryNow,Try AeroSwift,立即體驗
@@ -35,7 +35,7 @@ cards.hubs.title,ON-Dock →,ON-Dock →
 cards.hubs.desc,"ON-Dock provides precision autonomous landing and rapid energy replenishment in any field condition.",ON-Dock 在任何野外環境下皆能提供精準的自主降落與快速電力補充。
 cards.hubs.feature1,Autonomous Docking,自主對接系統
 cards.hubs.feature2,Weatherproof Design,全天候防護設計
-cards.rescue.title,ONT GCS →,ONT GCS →
+cards.rescue.title,ON-GCS →,ON-GCS →
 cards.rescue.desc,"Integrated mission control systems for real-time aerial intelligence and emergency cargo deployment.","整合任務控制系統，實現即時空中情報與緊急貨物部署。"
 cards.rescue.feature1,Smart Monitoring,智慧監控
 cards.rescue.feature2,Remote Operation,遠端操作
