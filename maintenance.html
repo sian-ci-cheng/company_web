@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Under Maintenance — Omni Nexus Tech</title>
+  <title data-key="page_title">Under Maintenance — Omni Nexus Tech</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
   <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@400;700;900&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
@@ -91,7 +91,7 @@
       margin-bottom: 1.5rem;
     }
 
-    h1 span { color: #D0F040; font-style: italic; }
+    h1 .h1-accent { color: #D0F040; font-style: italic; }
 
     p {
       font-size: 1rem;
@@ -143,24 +143,46 @@
   <div class="container">
     <div class="logo">
       <img src="ONT Shield_logo.png" alt="ONT Logo" />
-      <span>Omni Nexus Tech</span>
+      <span data-key="brand_name">Omni Nexus Tech</span>
     </div>
 
-    <div class="badge">System Maintenance</div>
+    <div class="badge" data-key="badge">System Maintenance</div>
 
-    <h1>Under<br /><span>Maintenance</span></h1>
+    <h1><span data-key="h1_line1">Under</span><br /><span class="h1-accent" data-key="h1_accent">Maintenance</span></h1>
 
     <div class="divider"></div>
 
-    <p>We are upgrading our systems.<br />The site will be back shortly.</p>
+    <p data-key="body_text">We are upgrading our systems. The site will be back shortly.</p>
 
     <div class="divider"></div>
 
     <p class="contact">
-      For urgent enquiries, contact &nbsp;
-      <a href="mailto:info@omninexustech.com">info@omninexustech.com</a>
+      <span data-key="contact_prefix">For urgent enquiries, contact</span>&nbsp;
+      <a data-key="contact_email" href="mailto:info@omninexustech.com">info@omninexustech.com</a>
     </p>
   </div>
 
+  <script>
+    fetch('./maintenance_content.csv')
+      .then(r => r.text())
+      .then(csv => {
+        const data = {};
+        csv.trim().split('\n').slice(1).forEach(line => {
+          const i = line.indexOf(',');
+          if (i === -1) return;
+          const key = line.slice(0, i).trim();
+          let val = line.slice(i + 1).trim();
+          if (val.startsWith('"') && val.endsWith('"')) val = val.slice(1, -1);
+          data[key] = val;
+        });
+        document.querySelectorAll('[data-key]').forEach(el => {
+          const val = data[el.dataset.key];
+          if (!val) return;
+          if (el.tagName === 'TITLE') { el.textContent = val; }
+          else if (el.dataset.key === 'contact_email') { el.textContent = val; el.href = 'mailto:' + val; }
+          else { el.textContent = val; }
+        });
+      });
+  </script>
 </body>
 </html>
