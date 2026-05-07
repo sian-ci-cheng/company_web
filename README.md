@@ -1,20 +1,36 @@
-<div align="center">
-<img width="1200" height="475" alt="GHBanner" src="https://github.com/user-attachments/assets/0aa67016-6eaf-458a-adb2-6e31a0763ed6" />
-</div>
+# Omni Nexus Tech — 公司官網
 
-# Run and deploy your AI Studio app
+## Branch 說明
 
-This contains everything you need to run your app locally.
+| Branch | 用途 |
+|--------|------|
+| `master` | 主開發分支，存放所有原始碼 |
+| `github` | 部署分支，存放 build 好的靜態檔案，供 GitHub Pages 發佈網站使用 |
 
-View your app in AI Studio: https://ai.studio/apps/a3b99c10-b5dc-4c0f-889b-1d2e0f3c7041
+> `github` 分支由 `npx gh-pages -d dist -b github` 自動產生，請勿手動編輯。
 
-## Run Locally
+---
 
-**Prerequisites:**  Node.js
+## 本地開發
 
+**環境需求：** Node.js
 
-1. Install dependencies:
-   `npm install`
-2. Set the `GEMINI_API_KEY` in [.env.local](.env.local) to your Gemini API key
-3. Run the app:
-   `npm run dev`
+1. 安裝套件：
+   ```bash
+   npm install
+   ```
+2. 設定環境變數，將 `GEMINI_API_KEY` 填入 `.env.local`
+
+3. 啟動開發伺服器：
+   ```bash
+   npm run dev
+   ```
+
+## 部署網站
+
+```bash
+npm run build
+npx gh-pages -d dist -b github --remote origin
+```
+
+執行後 GitHub Pages 會自動更新網站內容。
