@@ -15,7 +15,6 @@ npm run clean     # Remove dist/
 ## Environment Setup
 
 Copy `.env.example` to `.env.local` and set:
-- `GEMINI_API_KEY` — required for Google Gemini AI integration
 - `APP_URL` — deployment URL (used in self-referential links)
 
 ## Architecture

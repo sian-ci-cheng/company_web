@@ -19,7 +19,7 @@
    ```bash
    npm install
    ```
-2. 設定環境變數：將 `.env.example` 複製為 `.env.local`，並填入 `GEMINI_API_KEY`
+2. 設定環境變數：將 `.env.example` 複製為 `.env.local`
    ```bash
    # macOS / Linux
    cp .env.example .env.local
