@@ -13,18 +13,29 @@
 
 ## 本地開發
 
-**環境需求：** Node.js
+**環境需求：** Node.js（建議 LTS 版本，至 [nodejs.org](https://nodejs.org) 下載）
 
 1. 安裝套件：
    ```bash
    npm install
    ```
-2. 設定環境變數，將 `GEMINI_API_KEY` 填入 `.env.local`
+2. 設定環境變數：將 `.env.example` 複製為 `.env.local`，並填入 `GEMINI_API_KEY`
+   ```bash
+   # macOS / Linux
+   cp .env.example .env.local
+
+   # Windows (CMD)
+   copy .env.example .env.local
+   ```
 
 3. 啟動開發伺服器：
    ```bash
    npm run dev
    ```
+
+4. 開啟瀏覽器前往 **http://localhost:3000**
+
+> **Windows 注意事項：** 若防火牆跳出詢問視窗，請選「允許存取」。若 3000 port 已被佔用，Vite 會自動改用 3001、3002 等，請依終端機顯示的網址開啟。
 
 ## 部署網站
 
