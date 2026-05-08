@@ -1,5 +1,4 @@
 @import "tailwindcss";
-@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600;700&family=Inter:wght@300;400;500&display=swap');
 
 @font-face {
   font-family: "Youth";
@@ -10,8 +9,8 @@
 }
 
 @theme {
-  --font-sans: "Inter", ui-sans-serif, system-ui;
-  --font-display: "Outfit", sans-serif;
+  --font-sans: "Youth", ui-sans-serif, system-ui;
+  --font-display: "Youth", sans-serif;
   --color-accent: #D0F040;
 }
 

@@ -1,104 +1,139 @@
 import { motion, useScroll, useTransform } from "motion/react";
 import { Globe, Shield, Zap, ChevronRight } from "lucide-react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
-const t = {
-  nav: {
-    explore: "Explore ONT",
-    safety: "Safety",
-    about: "About Us",
-    tryNow: "Try Now"
-  },
-  about: {
-    label: "Our Philosophy",
-    subtitle: "Orchestrate. Navigate. Threshold.",
-    intro: "Omni Nexus Tech was founded on a core belief: intelligent autonomy should serve those who need it most. From emergency response to critical infrastructure monitoring, we build systems that let operators accomplish missions with greater precision, speed, and confidence.",
-    orchestrate: {
-      zh: "Orchestrate",
-      desc: "Every mission is an interplay of complex systems — drones, data, operators, and ground infrastructure. We design platforms that bring order to complexity, enabling every operational layer to coordinate seamlessly. Our systems don't just automate tasks; they integrate the entire operational ecosystem so teams can focus on decisions, not logistics."
+const defaultT = {
+    nav: {
+      explore: "Explore ONT",
+      safety: "Safety",
+      about: "About Us",
+      tryNow: "Try Now"
     },
-    navigate: {
-      zh: "Navigate",
-      desc: "The real world is full of uncertainty. Changing weather, shifting terrain, communication disruptions. We design our systems to advance robustly through uncertainty — adaptive, resilient, and always mission-oriented. For us, navigation is not just a flight path; it's the ability to find the right course under any conditions."
+    about: {
+      label: "Our Philosophy",
+      subtitle: "Orchestrate. Navigate. Threshold.",
+      intro: "Omni Nexus Tech was founded on a core belief: intelligent autonomy should serve those who need it most. From emergency response to critical infrastructure monitoring, we build systems that let operators accomplish missions with greater precision, speed, and confidence.",
+      orchestrate: {
+        zh: "Orchestrate",
+        desc: "Every mission is an interplay of complex systems — drones, data, operators, and ground infrastructure. We design platforms that bring order to complexity, enabling every operational layer to coordinate seamlessly. Our systems don't just automate tasks; they integrate the entire operational ecosystem so teams can focus on decisions, not logistics."
+      },
+      navigate: {
+        zh: "Navigate",
+        desc: "The real world is full of uncertainty. Changing weather, shifting terrain, communication disruptions. We design our systems to advance robustly through uncertainty — adaptive, resilient, and always mission-oriented. For us, navigation is not just a flight path; it's the ability to find the right course under any conditions."
+      },
+      threshold: {
+        zh: "Threshold",
+        desc: "We exist at the edge of possibility. Every product pushes the boundary between human capability and machine precision — redefining what operators can see, reach, and protect. Threshold is our commitment: to continuously push the frontier, making today's limits tomorrow's starting point."
+      }
     },
-    threshold: {
-      zh: "Threshold",
-      desc: "We exist at the edge of possibility. Every product pushes the boundary between human capability and machine precision — redefining what operators can see, reach, and protect. Threshold is our commitment: to continuously push the frontier, making today's limits tomorrow's starting point."
+    explore: {
+      intro: "Explore our complete autonomous aerial systems ecosystem.",
+      orchestrate: {
+        zh: "Orchestrate",
+        product: "ON-Dock",
+        productDesc: "Autonomous Hangar System",
+        features: ["Visual Landing", "Communication Relay", "Detachable RTK", "4/5G Module"]
+      },
+      navigate: {
+        zh: "Navigate",
+        product: "ONT-GCS",
+        productDesc: "Multi-drone Ground Control",
+        features: ["Multi-drone Swarm Flight", "Custom Ground Control Station (ONT-GCS)"]
+      },
+      threshold: {
+        zh: "Threshold",
+        product: "AI Recognition",
+        productDesc: "Intelligent Recognition System",
+        features: ["AI Object Recognition", "Multi-drone ISR"]
+      }
+    },
+    hero: {
+      tag: "Orchestrate. Navigate. Threshold.",
+      title1: "ONT Service",
+      title2: "is here",
+      desc: "",
+      watchDemo: "Watch Demo",
+      solutions: "Solutions"
+    },
+    cards: {
+      hubs: {
+        title: "ON-Dock →",
+        desc: "ON-Dock delivers precise autonomous landing and rapid power replenishment in any field environment.",
+        feature1: "Autonomous Docking System",
+        feature2: "All-weather Protection"
+      },
+      rescue: {
+        title: "ON-GCS →",
+        desc: "An integrated mission control system for real-time aerial intelligence and emergency cargo deployment.",
+        feature1: "Smart Surveillance",
+        feature2: "Remote Operations"
+      }
+    },
+    cta: {
+      title: "Ready to take flight?",
+      button: "Contact Us"
+    },
+    footer: {
+      companyName: "Omni Nexus Tech Co., Ltd.",
+      addressLabel: "Address: ",
+      address: "7F06, No.5, Sec. 5, Xinyi Rd., Xinyi Dist., Taipei",
+      phoneLabel: "Phone: ",
+      phone: "02-27588857",
+      desc: "Empowering the world with intelligent autonomous systems and high-performance logistics platforms.",
+      sections: {
+        company: "Company",
+        legal: "Legal"
+      },
+      links: {
+        careers: "Careers",
+        contact: "Contact",
+        feedback: "Feedback",
+        privacy: "Privacy Policy",
+        terms: "Terms of Service",
+        cookies: "Cookie Policy"
+      },
+      rights: "© 2026 Omni Nexus Tech. All rights reserved."
     }
-  },
-  explore: {
-    intro: "Explore our complete autonomous aerial systems ecosystem.",
-    orchestrate: {
-      zh: "Orchestrate",
-      product: "ON-Dock",
-      productDesc: "Autonomous Hangar System",
-      features: ["Visual Landing", "Communication Relay", "Detachable RTK", "4/5G Module"]
-    },
-    navigate: {
-      zh: "Navigate",
-      product: "ONT-GCS",
-      productDesc: "Multi-drone Ground Control",
-      features: ["Multi-drone Swarm Flight", "Custom Ground Control Station (ONT-GCS)"]
-    },
-    threshold: {
-      zh: "Threshold",
-      product: "AI Recognition",
-      productDesc: "Intelligent Recognition System",
-      features: ["AI Object Recognition", "Multi-drone ISR"]
-    }
-  },
-  hero: {
-    tag: "Orchestrate. Navigate. Threshold.",
-    title1: "ONT Service",
-    title2: "is here",
-    desc: "",
-    watchDemo: "Watch Demo",
-    solutions: "Solutions"
-  },
-  cards: {
-    hubs: {
-      title: "ON-Dock →",
-      desc: "ON-Dock delivers precise autonomous landing and rapid power replenishment in any field environment.",
-      feature1: "Autonomous Docking System",
-      feature2: "All-weather Protection"
-    },
-    rescue: {
-      title: "ON-GCS →",
-      desc: "An integrated mission control system for real-time aerial intelligence and emergency cargo deployment.",
-      feature1: "Smart Surveillance",
-      feature2: "Remote Operations"
-    }
-  },
-  cta: {
-    title: "Ready to take flight?",
-    button: "Contact Us"
-  },
-  footer: {
-    companyName: "Omni Nexus Tech Co., Ltd.",
-    addressLabel: "Address: ",
-    address: "7F06, No.5, Sec. 5, Xinyi Rd., Xinyi Dist., Taipei",
-    phoneLabel: "Phone: ",
-    phone: "02-27588857",
-    desc: "Empowering the world with intelligent autonomous systems and high-performance logistics platforms.",
-    sections: {
-      company: "Company",
-      legal: "Legal"
-    },
-    links: {
-      careers: "Careers",
-      contact: "Contact",
-      feedback: "Feedback",
-      privacy: "Privacy Policy",
-      terms: "Terms of Service",
-      cookies: "Cookie Policy"
-    },
-    rights: "© 2026 Omni Nexus Tech. All rights reserved."
-  }
 };
+
+function parseCSV(csv: string): Record<string, unknown> {
+  const result: Record<string, unknown> = {};
+  for (const line of csv.trim().split('\n').slice(1)) {
+    if (!line.trim()) continue;
+    const out: string[] = [];
+    let cur = '', inQ = false;
+    for (let i = 0; i < line.length; i++) {
+      const c = line[i];
+      if (c === '"') { if (inQ && line[i+1] === '"') { cur += '"'; i++; } else { inQ = !inQ; } }
+      else if (c === ',' && !inQ) { out.push(cur); cur = ''; }
+      else { cur += c; }
+    }
+    out.push(cur);
+    const [key, val] = [out[0], out[1]];
+    if (!key || val === undefined) continue;
+    const parts = key.split('.');
+    let node = result;
+    for (let i = 0; i < parts.length - 1; i++) {
+      if (!node[parts[i]]) node[parts[i]] = {};
+      node = node[parts[i]] as Record<string, unknown>;
+    }
+    node[parts[parts.length - 1]] = val.includes('|') ? val.split('|') : val;
+  }
+  return result;
+}
 
 export default function App() {
   const [page, setPage] = useState<'home' | 'explore'>('home');
   const [btnMouse, setBtnMouse] = useState<{ x: number; y: number } | null>(null);
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const [t, setT] = useState<any>(defaultT);
+
+  useEffect(() => {
+    fetch('./content.csv')
+      .then(r => r.text())
+      .then(csv => setT({ ...defaultT, ...parseCSV(csv) }))
+      .catch(() => {});
+  }, []);
 
   const { scrollYProgress } = useScroll();
   const heroOpacity = useTransform(scrollYProgress, [0, 0.2], [1, 0]);
@@ -343,7 +378,7 @@ export default function App() {
                         </h3>
                       </div>
                       <button className="self-start mt-8 px-6 py-3 bg-black text-white font-bold text-xs uppercase tracking-widest rounded-full hover:bg-black/70 transition-colors">
-                        Learn More
+                        More details
                       </button>
                     </div>
                   </motion.div>
@@ -414,7 +449,7 @@ export default function App() {
               transition={{ duration: 0.7 }}
             >
               <p className="text-sm font-black uppercase tracking-widest text-accent mb-6">
-                Contact Us
+                Contact
               </p>
               <h3
                 className="font-display font-bold tracking-tighter mb-8"
