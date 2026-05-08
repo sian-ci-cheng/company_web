@@ -1,12 +1,11 @@
 key,en,zh
-nav.explore,Explore OmniNexus,探索永誠發
-nav.safety,Safety,安全
+nav.explore,Product,探索永誠發
+nav.safety,Application,應用
 nav.about,About Us,關於我們
-nav.tryNow,Try AeroSwift,立即體驗
+nav.tryNow,Contact US,聯絡我們
 hero.tag,"Orchestrate. Navigate. Threshold.","Orchestrate. Navigate. Threshold."
 hero.title1,ONT Service,永誠發服務
 hero.title2,is here,在這裡
-hero.desc,"Empowering emergency response with autonomous aircraft and integrated mobile charging stations.",以自主飛行器與整合式行動充電站，強化緊急應對效率。
 hero.watchDemo,Watch Demo,觀看演示
 hero.solutions,Solutions,解決方案
 explore.intro,Discover our complete ecosystem of autonomous aerial systems.,探索我們完整的自主空中系統生態。
