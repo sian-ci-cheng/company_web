@@ -1,5 +1,5 @@
-import { motion, useScroll, useTransform } from "motion/react";
-import { Globe, Shield, Zap, ChevronRight } from "lucide-react";
+import { motion, AnimatePresence, useScroll, useTransform } from "motion/react";
+import { ChevronRight, Globe, Shield, Zap } from "lucide-react";
 import { useState, useEffect } from "react";
 
 const defaultT = {
@@ -124,7 +124,7 @@ function parseCSV(csv: string): Record<string, unknown> {
 
 export default function App() {
   const [page, setPage] = useState<'home' | 'explore'>('home');
-  const [btnMouse, setBtnMouse] = useState<{ x: number; y: number } | null>(null);
+  const [menuOpen, setMenuOpen] = useState(false);
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const [t, setT] = useState<any>(defaultT);
 
@@ -150,26 +150,53 @@ export default function App() {
       {/* ═══════════════ HOME ═══════════════ */}
       {page === 'home' && (
         <>
-          {/* Fixed Explore button — bottom center */}
-          <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50">
-            <button
-              onClick={() => goTo('explore')}
-              onMouseMove={(e) => {
-                const rect = e.currentTarget.getBoundingClientRect();
-                setBtnMouse({ x: e.clientX - rect.left, y: e.clientY - rect.top });
-              }}
-              onMouseLeave={() => setBtnMouse(null)}
-              style={{
-                background: btnMouse
-                  ? `radial-gradient(circle at ${btnMouse.x}px ${btnMouse.y}px, #D0F040 0%, #a8d800 55%, rgba(0,0,0,0.7) 100%)`
-                  : 'rgba(0,0,0,0.7)',
-                color: btnMouse ? '#000' : '#fff',
-                borderColor: btnMouse ? 'transparent' : 'rgba(255,255,255,0.25)',
-              }}
-              className="px-12 py-3 border backdrop-blur-sm font-bold text-sm uppercase tracking-widest rounded-full shadow-xl shadow-black/60 cursor-pointer"
-            >
-              {t.nav.explore}
-            </button>
+          {/* Fixed bottom navbar */}
+          <div className="fixed bottom-10 left-1/2 -translate-x-1/2 z-50 flex flex-col items-center">
+            <AnimatePresence>
+              {menuOpen && (
+                <>
+                  <div className="fixed inset-0 -z-10" onClick={() => setMenuOpen(false)} />
+                  <motion.div
+                    initial={{ opacity: 0, scale: 0.92, y: 16 }}
+                    animate={{ opacity: 1, scale: 1, y: 0 }}
+                    exit={{ opacity: 0, scale: 0.92, y: 16 }}
+                    transition={{ duration: 0.22, ease: [0.25, 0.46, 0.45, 0.94] }}
+                    className="mb-3 bg-[#0d0d0d] border border-white/10 rounded-3xl overflow-hidden shadow-2xl"
+                    style={{ width: '300px' }}
+                  >
+                    <div className="flex items-center justify-between px-6 py-5 border-b border-white/5">
+                      <span className="font-display font-black text-xl tracking-tighter text-white">ONT</span>
+                      <button onClick={() => setMenuOpen(false)} className="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white text-sm transition-colors cursor-pointer">✕</button>
+                    </div>
+                    <nav className="py-2">
+                      {[
+                        { label: t.nav.explore, action: () => { goTo('explore'); setMenuOpen(false); } },
+                        { label: t.nav.safety,  action: () => setMenuOpen(false) },
+                        { label: t.nav.about,   action: () => { goTo('explore'); setMenuOpen(false); } },
+                        { label: t.nav.tryNow,  action: () => setMenuOpen(false) },
+                      ].map(({ label, action }) => (
+                        <motion.button key={label} onClick={action} whileHover={{ x: 16, y: -4, scale: 1.04 }} transition={{ type: 'spring', stiffness: 500, damping: 20 }} className="w-full text-left px-6 py-4 text-white font-semibold text-lg border-b border-white/[0.04] last:border-0 cursor-pointer origin-left">{label}</motion.button>
+                      ))}
+                    </nav>
+                    <div className="px-6 py-5 border-t border-white/5">
+                      <p className="text-white/30 text-xs">{t.footer.rights}</p>
+                    </div>
+                  </motion.div>
+                </>
+              )}
+            </AnimatePresence>
+            <div className="flex items-center gap-3">
+              <button onClick={() => setMenuOpen(v => !v)} className="flex items-center justify-between px-6 bg-black/70 border border-white/20 backdrop-blur-sm rounded-full shadow-xl shadow-black/60 cursor-pointer hover:border-white/40 transition-colors" style={{ width: '200px', height: '47px' }}>
+                <span className="font-display font-black text-base tracking-tighter text-white">ONT</span>
+                <img src="ONT Shield_logo.png" alt="ONT Logo" className="h-5 w-5 invert" />
+              </button>
+              <button className="flex items-center justify-center bg-black/70 border border-white/20 backdrop-blur-sm rounded-full shadow-xl shadow-black/60 cursor-pointer hover:border-white/40 transition-colors" style={{ width: '44px', height: '44px' }}>
+                <svg viewBox="0 0 24 24" fill="white" className="w-full h-full"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+              </button>
+              <button className="flex items-center justify-center bg-black/70 border border-white/20 backdrop-blur-sm rounded-full shadow-xl shadow-black/60 cursor-pointer hover:border-white/40 transition-colors" style={{ width: '44px', height: '44px' }}>
+                <svg viewBox="0 0 24 24" fill="white" className="w-full h-full"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </button>
+            </div>
           </div>
 
           {/* Hero */}
@@ -188,10 +215,6 @@ export default function App() {
               transition={{ duration: 0.8, ease: "easeOut" }}
               className="absolute top-10 left-8 md:top-14 md:left-14 z-10 max-w-xl"
             >
-              <div className="flex items-center gap-3 mb-10">
-                <img src="ONT Shield_logo.png" alt="Omni Nexus Logo" className="h-9 w-9 rounded-xl invert" />
-                <span className="font-display font-bold text-sm tracking-tighter uppercase text-white/70">Omni Nexus Tech</span>
-              </div>
               <h1
                 className="mb-6"
                 style={{
@@ -214,6 +237,8 @@ export default function App() {
           {/* ON-Dock + ON-GCS cards */}
           <section className="py-4 px-4 md:px-6">
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+
+              {/* ON-Dock */}
               <motion.div
                 whileHover={{ y: -4 }}
                 className="relative overflow-hidden rounded-[2rem] bg-[#111] group cursor-pointer border border-white/5"
@@ -233,6 +258,7 @@ export default function App() {
                 </div>
               </motion.div>
 
+              {/* ON-GCS */}
               <motion.div
                 whileHover={{ y: -4 }}
                 className="relative overflow-hidden rounded-[2rem] bg-[#111] group cursor-pointer border border-white/5"
@@ -251,33 +277,37 @@ export default function App() {
                   </ul>
                 </div>
               </motion.div>
+
             </div>
           </section>
 
-          {/* Home footer */}
-          <footer className="pt-10 pb-12 px-6 md:px-14 border-t border-white/5">
-            <div className="max-w-7xl mx-auto flex flex-col sm:flex-row sm:items-start justify-between gap-8">
-              <div>
-                <p className="text-white font-bold text-sm mb-2">{t.footer.companyName}</p>
-                <p className="text-white/30 text-xs leading-relaxed">
-                  Copyright © 2026 Manna Air Delivery.<br />All rights reserved.
-                </p>
+          {/* Home footer — MANNA style */}
+          <footer className="pt-12 pb-10 px-6 md:px-14 border-t border-white/5">
+            <div className="max-w-7xl mx-auto">
+
+              {/* Row 1: brand + nav links */}
+              <div className="flex flex-col sm:flex-row sm:items-start justify-between gap-6 mb-6">
+                <span className="font-display font-black text-xl tracking-tighter text-white">ONT</span>
+                <div className="flex flex-wrap gap-x-6 gap-y-2">
+                  {[
+                    t.footer.links.careers,
+                    t.footer.links.cookies,
+                    t.footer.links.privacy,
+                    t.footer.links.terms,
+                    t.footer.links.contact,
+                    t.footer.links.feedback,
+                  ].map(label => (
+                    <a key={label} href="#" className="text-sm text-white/60 hover:text-white transition-colors">
+                      {label}
+                    </a>
+                  ))}
+                </div>
               </div>
 
-              <div className="flex flex-wrap gap-x-6 gap-y-2 sm:text-right">
-                {[
-                  t.footer.links.careers,
-                  t.footer.links.cookies,
-                  t.footer.links.privacy,
-                  t.footer.links.terms,
-                  t.footer.links.contact,
-                  t.footer.links.feedback,
-                ].map(label => (
-                  <a key={label} href="#" className="text-xs text-white/35 hover:text-white transition-colors">
-                    {label}
-                  </a>
-                ))}
-              </div>
+              {/* Row 2: copyright */}
+              <p className="text-white/30 text-xs leading-relaxed">
+                Copyright © 2026 Omni Nexus.<br />All rights reserved.
+              </p>
             </div>
           </footer>
         </>
@@ -286,31 +316,8 @@ export default function App() {
       {/* ═══════════════ EXPLORE ═══════════════ */}
       {page === 'explore' && (
         <>
-          {/* Fixed header */}
-          <header className="fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 py-4 bg-black/90 backdrop-blur-md border-b border-white/5">
-            <button onClick={() => goTo('home')} className="flex items-center gap-3 group">
-              <ChevronRight className="w-4 h-4 text-white/40 rotate-180 group-hover:text-white transition-colors" />
-              <img src="ONT Shield_logo.png" alt="Logo" className="h-7 w-7 rounded-lg invert" />
-              <span className="font-display font-bold text-sm tracking-tighter uppercase text-white/60 group-hover:text-white transition-colors hidden sm:inline">
-                Omni Nexus Tech
-              </span>
-            </button>
-
-            <nav className="hidden md:flex items-center gap-8">
-              {[
-                { href: '#products', label: 'Products' },
-                { href: '#company',  label: 'Company' },
-                { href: '#contact',  label: 'Contact' },
-              ].map(({ href, label }) => (
-                <a key={href} href={href} className="text-xs font-bold uppercase tracking-widest text-white/50 hover:text-white transition-colors">
-                  {label}
-                </a>
-              ))}
-            </nav>
-          </header>
-
           {/* 產品介紹 */}
-          <section id="products" className="pt-24 pb-8 px-6 md:px-12">
+          <section id="products" className="pt-20 pb-8 px-6 md:px-12">
             <div className="max-w-5xl mx-auto">
               <motion.div
                 initial={{ opacity: 0, y: 16 }}
@@ -493,7 +500,7 @@ export default function App() {
                   <a href="#contact"  className="text-xs text-white/35 hover:text-white transition-colors">Contact</a>
                 </div>
               </div>
-              <p className="text-[10px] uppercase tracking-widest font-bold text-white/20">{t.footer.rights}</p>
+              <p className="text-[9px] tracking-wide font-normal text-white/20">{t.footer.rights}</p>
             </div>
           </footer>
         </>
